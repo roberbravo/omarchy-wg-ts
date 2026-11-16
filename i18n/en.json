@@ -1,0 +1,18 @@
+{
+  "panel.title": "VPN",
+  "panel.connected": { "one": "%1 connected", "other": "%1 connected" },
+  "panel.disconnected": "Disconnected",
+  "panel.connections": "Connections",
+  "panel.empty": "No VPN connections found. Import a WireGuard or VPN profile into NetworkManager, or install Tailscale.",
+  "panel.noBackends": "Neither nmcli nor tailscale is installed.",
+  "kind.vpn": "VPN",
+  "tailscale.needsLogin": "Needs login",
+  "tailscale.accounts": "Tailscale accounts",
+  "tailscale.unknownAccount": "Unknown account",
+  "tailscale.authorizeOperator": "Allow managing Tailscale",
+  "tailscale.authorizeHelp": "Makes your user the Tailscale operator (asks for your password once).",
+  "error.commandFailed": "Command failed",
+  "error.upFailed": "Could not start Tailscale",
+  "error.switchFailed": "Could not switch account",
+  "error.authorizationFailed": "Authorization failed"
+}

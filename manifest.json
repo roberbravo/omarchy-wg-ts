@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "roberbravo.vpn",
+  "name": "VPN",
+  "version": "0.1.0",
+  "author": "roberbravo",
+  "license": "MIT",
+  "description": "Switch between VPNs from the Omarchy bar: WireGuard and VPN connections managed by NetworkManager, plus Tailscale.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "VPN",
+    "description": "Toggle WireGuard, NetworkManager VPNs, and Tailscale from one panel.",
+    "category": "Network",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "refreshIntervalSec": 30,
+      "exclusive": false,
+      "showTailscale": true
+    },
+    "schema": [
+      {
+        "key": "exclusive",
+        "type": "boolean",
+        "label": "One VPN at a time",
+        "description": "Turning a VPN on turns the others off.",
+        "defaultValue": false
+      },
+      {
+        "key": "showTailscale",
+        "type": "boolean",
+        "label": "Show Tailscale",
+        "description": "List Tailscale when the tailscale CLI is installed.",
+        "defaultValue": true
+      },
+      {
+        "key": "refreshIntervalSec",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "min": 5,
+        "max": 3600,
+        "step": 5,
+        "defaultValue": 30
+      }
+    ]
+  }
+}
