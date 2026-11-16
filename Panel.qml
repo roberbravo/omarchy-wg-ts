@@ -12,8 +12,8 @@ import "Model.js" as Model
 // and VPN-plugin connections plus Tailscale — with one switch each.
 Panel {
   id: root
-  moduleName: "roberbravo.vpn"
-  ipcTarget: "roberbravo.vpn"
+  moduleName: "omarchy-wg-ts"
+  ipcTarget: "omarchy-wg-ts"
   manageIpc: false
 
   readonly property string vpnGlyph: "󰖂"

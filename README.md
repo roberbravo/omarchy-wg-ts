@@ -1,4 +1,4 @@
-# VPN switcher for Omarchy
+# omarchy-wg-ts
 
 An [Omarchy](https://omarchy.org) bar widget that lists every VPN on your machine and turns each one on or off with a switch:
 
@@ -10,13 +10,13 @@ New NetworkManager VPN profiles show up on their own; there is nothing to config
 ## Install
 
 ```sh
-omarchy plugin add https://github.com/roberbravo/omarchy-vpn.git --enable
+omarchy plugin add https://github.com/roberbravo/omarchy-wg-ts.git --enable
 ```
 
 Move it on the bar if you like:
 
 ```sh
-omarchy bar move roberbravo.vpn --section right
+omarchy bar move omarchy-wg-ts --section right
 ```
 
 ## Usage
@@ -41,21 +41,21 @@ Set them from the bar widget settings, or in the plugin's entry in `~/.config/om
 
 ## Scripting
 
-The widget answers on the `roberbravo.vpn` IPC target. `<name>` is a connection name, NetworkManager UUID, or `tailscale`:
+The widget answers on the `omarchy-wg-ts` IPC target. `<name>` is a connection name, NetworkManager UUID, or `tailscale`:
 
 ```sh
-omarchy-shell roberbravo.vpn status          # names of active VPNs, or "Disconnected"
-omarchy-shell roberbravo.vpn list            # JSON: id, name, kind, active
-omarchy-shell roberbravo.vpn up <name>
-omarchy-shell roberbravo.vpn down <name>
-omarchy-shell roberbravo.vpn toggleVpn <name>
-omarchy-shell roberbravo.vpn disconnectAll
+omarchy-shell omarchy-wg-ts status          # names of active VPNs, or "Disconnected"
+omarchy-shell omarchy-wg-ts list            # JSON: id, name, kind, active
+omarchy-shell omarchy-wg-ts up <name>
+omarchy-shell omarchy-wg-ts down <name>
+omarchy-shell omarchy-wg-ts toggleVpn <name>
+omarchy-shell omarchy-wg-ts disconnectAll
 ```
 
 Example Hyprland binding in `~/.config/hypr/bindings.lua`:
 
 ```lua
-o.bind("SUPER + ALT + V", "Toggle office VPN", "omarchy-shell roberbravo.vpn toggleVpn office")
+o.bind("SUPER + ALT + V", "Toggle office VPN", "omarchy-shell omarchy-wg-ts toggleVpn office")
 ```
 
 ## Requirements and permissions
@@ -68,8 +68,8 @@ The plugin never reads, stores, or prints keys or configuration files. It only r
 ## Update and remove
 
 ```sh
-omarchy plugin update roberbravo.vpn
-omarchy plugin remove roberbravo.vpn
+omarchy plugin update omarchy-wg-ts
+omarchy plugin remove omarchy-wg-ts
 ```
 
 ## Troubleshooting
@@ -77,7 +77,7 @@ omarchy plugin remove roberbravo.vpn
 - **A VPN is missing.** Only NetworkManager connections of type `wireguard` or `vpn` are listed. Check with `nmcli -t -f NAME,TYPE connection show`. Profiles started with `wg-quick` are not managed by NetworkManager; import them instead.
 - **Tailscale says access denied.** Use the **Allow managing Tailscale** row, or run `sudo tailscale set --operator=$USER`.
 - **Changes do not show up.** Reload plugins with `omarchy-shell shell rescanPlugins`. This is required after editing a symlinked checkout.
-- **Errors.** The shell log is at `/run/user/$UID/quickshell/by-id/*/log.log`; search it for `roberbravo.vpn`.
+- **Errors.** The shell log is at `/run/user/$UID/quickshell/by-id/*/log.log`; search it for `omarchy-wg-ts`.
 
 ## Development
 
@@ -89,8 +89,8 @@ omarchy plugin validate .
 To try a checkout live, link it into your plugins folder:
 
 ```sh
-ln -s "$PWD" ~/.config/omarchy/plugins/roberbravo.vpn
-omarchy plugin enable roberbravo.vpn
+ln -s "$PWD" ~/.config/omarchy/plugins/omarchy-wg-ts
+omarchy plugin enable omarchy-wg-ts
 ```
 
 To release a version, bump `version` in `manifest.json`, run the tests and `omarchy plugin validate .`, then tag and push:
