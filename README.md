@@ -65,6 +65,20 @@ o.bind("SUPER + ALT + V", "Toggle office VPN", "omarchy-shell roberbravo.vpn tog
 
 The plugin never reads, stores, or prints keys or configuration files. It only runs `nmcli` and `tailscale` commands and shows connection names.
 
+## Update and remove
+
+```sh
+omarchy plugin update roberbravo.vpn
+omarchy plugin remove roberbravo.vpn
+```
+
+## Troubleshooting
+
+- **A VPN is missing.** Only NetworkManager connections of type `wireguard` or `vpn` are listed. Check with `nmcli -t -f NAME,TYPE connection show`. Profiles started with `wg-quick` are not managed by NetworkManager; import them instead.
+- **Tailscale says access denied.** Use the **Allow managing Tailscale** row, or run `sudo tailscale set --operator=$USER`.
+- **Changes do not show up.** Reload plugins with `omarchy-shell shell rescanPlugins`. This is required after editing a symlinked checkout.
+- **Errors.** The shell log is at `/run/user/$UID/quickshell/by-id/*/log.log`; search it for `roberbravo.vpn`.
+
 ## Development
 
 ```sh
@@ -77,6 +91,12 @@ To try a checkout live, link it into your plugins folder:
 ```sh
 ln -s "$PWD" ~/.config/omarchy/plugins/roberbravo.vpn
 omarchy plugin enable roberbravo.vpn
+```
+
+To release a version, bump `version` in `manifest.json`, run the tests and `omarchy plugin validate .`, then tag and push:
+
+```sh
+git tag v0.1.0 && git push origin main --tags
 ```
 
 ## License
